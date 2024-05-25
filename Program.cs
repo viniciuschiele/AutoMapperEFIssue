@@ -26,7 +26,7 @@ dbContext.Database.EnsureCreated();
 var mapper = host.Services.GetRequiredService<IMapper>();
 
 // Produces wrong SQL
-dbContext.Users.ProjectTo<UserDto>(mapper.ConfigurationProvider).FirstOrDefault();
+dbContext.Users.ProjectTo<UserDto>(mapper.ConfigurationProvider).ToList();
 
 // Produces the correct SQL
 dbContext.Users.Select(user => new UserDto
@@ -40,4 +40,4 @@ dbContext.Users.Select(user => new UserDto
         Body = post.Body,
         CreatedAt = post.CreatedAt
     }).FirstOrDefault()
-}).FirstOrDefault();
+}).ToList();
